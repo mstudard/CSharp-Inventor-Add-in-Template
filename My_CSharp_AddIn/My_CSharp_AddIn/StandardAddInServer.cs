@@ -266,7 +266,7 @@ namespace My_CSharp_AddIn
 
             private RibbonTab setup_tab(string display_name, string internal_name, Ribbon inv_ribbon)
             {
-                RibbonTab setup_tabRet = default(RibbonTab);
+                RibbonTab setup_tabRet = default;
                 RibbonTab ribbon_tab = null;
                 try
                 {
@@ -288,7 +288,7 @@ namespace My_CSharp_AddIn
 
             private RibbonPanel setup_panel(string display_name, string internal_name, RibbonTab ribbon_tab)
             {
-                RibbonPanel setup_panelRet = default(RibbonPanel);
+                RibbonPanel setup_panelRet = default;
                 RibbonPanel ribbon_panel = null;
                 try
                 {
