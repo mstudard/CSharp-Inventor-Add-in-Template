@@ -92,7 +92,7 @@ namespace My_CSharp_AddIn
             {
                 smcd.DataIO.WriteDataToFile(DXF_OPTIONS, dxf_filename);
             }
-            catch (Exception ex)
+            catch
             {
                 MessageBox.Show("Failed to save DXF");
                 return;

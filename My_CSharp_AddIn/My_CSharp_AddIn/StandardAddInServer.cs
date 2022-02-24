@@ -270,7 +270,7 @@ namespace My_CSharp_AddIn
                 {
                     ribbon_tab = inv_ribbon.RibbonTabs[internal_name];
                 }
-                catch (Exception ex)
+                catch
                 {
                 }
 
@@ -292,7 +292,7 @@ namespace My_CSharp_AddIn
                 {
                     ribbon_panel = ribbon_tab.RibbonPanels[internal_name];
                 }
-                catch (Exception ex)
+                catch
                 {
                 }
 
