@@ -23,7 +23,7 @@ namespace My_CSharp_AddIn
             // if the user resets the ribbon so the button can be added back in.
             private UserInterfaceEvents _m_uiEvents;
 
-            public UserInterfaceEvents m_uiEvents
+            public UserInterfaceEvents UiEvents
             {
                 [MethodImpl(MethodImplOptions.Synchronized)]
                 get
@@ -36,13 +36,13 @@ namespace My_CSharp_AddIn
                 {
                     if (_m_uiEvents != null)
                     {
-                        _m_uiEvents.OnResetRibbonInterface -= m_uiEvents_OnResetRibbonInterface;
+                        _m_uiEvents.OnResetRibbonInterface -= UiEvents_OnResetRibbonInterface;
                     }
 
                     _m_uiEvents = value;
                     if (_m_uiEvents != null)
                     {
-                        _m_uiEvents.OnResetRibbonInterface += m_uiEvents_OnResetRibbonInterface;
+                        _m_uiEvents.OnResetRibbonInterface += UiEvents_OnResetRibbonInterface;
                     }
                 }
             }
@@ -54,7 +54,7 @@ namespace My_CSharp_AddIn
             {
                 private ButtonDefinition _bd;
 
-                public ButtonDefinition bd
+                public ButtonDefinition Bd
                 {
                     [MethodImpl(MethodImplOptions.Synchronized)]
                     get
@@ -67,21 +67,21 @@ namespace My_CSharp_AddIn
                     {
                         if (this._bd != null)
                         {
-                            this._bd.OnExecute -= bd_OnExecute;
+                            this._bd.OnExecute -= Bd_OnExecute;
                         }
 
                         this._bd = value;
                         if (this._bd != null)
                         {
-                            this._bd.OnExecute += bd_OnExecute;
+                            this._bd.OnExecute += Bd_OnExecute;
                         }
                     }
                 }
 
-                private void bd_OnExecute(NameValueMap Context)
+                private void Bd_OnExecute(NameValueMap Context)
                 {
                     // Link button clicks to their respective commands.
-                    switch (bd.InternalName)
+                    switch (Bd.InternalName)
                     {
                         case "my_first_button":
                             CommandFunctions.RunAnExe();
@@ -102,13 +102,13 @@ namespace My_CSharp_AddIn
             }
 
             public delegate ButtonDefinition CreateButton(string display_text, string internal_name, string icon_path);
-            public ButtonDefinition button_template(string display_text, string internal_name, string icon_path)
+            public ButtonDefinition Button_template(string display_text, string internal_name, string icon_path)
             {
                 UI_Button MyButton = new UI_Button
                 {
-                    bd = Utilities.CreateButtonDefinition(display_text, internal_name, "", icon_path)
+                    Bd = Utilities.CreateButtonDefinition(display_text, internal_name, "", icon_path)
                 };
-                return MyButton.bd;
+                return MyButton.Bd;
             }
 
             // Declare all buttons here
@@ -128,7 +128,7 @@ namespace My_CSharp_AddIn
                     Globals.invApp = addInSiteObject.Application;
 
                     // Connect to the user-interface events to handle a ribbon reset.
-                    m_uiEvents = Globals.invApp.UserInterfaceManager.UserInterfaceEvents;
+                    UiEvents = Globals.invApp.UserInterfaceManager.UserInterfaceEvents;
 
                     // *********************************************************************************
                     // * The remaining code in this Sub is all for adding the add-in into Inventor's UI.
@@ -137,7 +137,7 @@ namespace My_CSharp_AddIn
                     // *********************************************************************************
 
                     // ButtonName = create_button(display_text, internal_name, icon_path)
-                    CreateButton create_button = new CreateButton (button_template);
+                    CreateButton create_button = new CreateButton (Button_template);
                     MyFirstButton = create_button("    My First    \n    Command    ", "my_first_button", @"ButtonResources\MyIcon1");
                     MySecondButton = create_button("    My Second    \n    Command    ", "my_second_button", @"ButtonResources\MyIcon2");
                     CloseDocButton = create_button("    Close    \n    Document    ", "close_doc_button", @"ButtonResources\MyIcon3");
@@ -166,7 +166,7 @@ namespace My_CSharp_AddIn
                 MySecondButton = null;
                 CloseDocButton = null;
                 ExportDxfButton = null;
-                m_uiEvents = null;
+                UiEvents = null;
                 Globals.invApp = null;
 
                 GC.Collect();
@@ -214,28 +214,28 @@ namespace My_CSharp_AddIn
                 // Set up Tabs.
                 // tab = setup_panel(display_name, internal_name, inv_ribbon)
                 RibbonTab MyTab_asm;
-                MyTab_asm = setup_tab("My Tab", "my_tab_asm", asmRibbon);
+                MyTab_asm = Setup_tab("My Tab", "my_tab_asm", asmRibbon);
 
                 RibbonTab MyTab_prt;
-                MyTab_prt = setup_tab("My Tab", "my_tab_prt", prtRibbon);
+                MyTab_prt = Setup_tab("My Tab", "my_tab_prt", prtRibbon);
 
                 RibbonTab MyTab_dwg;
-                MyTab_dwg = setup_tab("My Tab", "my_tab_dwg", dwgRibbon);
+                MyTab_dwg = Setup_tab("My Tab", "my_tab_dwg", dwgRibbon);
 
 
                 // Set up Panels.
                 // panel = setup_panel(display_name, internal_name, ribbon_tab)
                 RibbonPanel MyPanel_prt;
-                MyPanel_prt = setup_panel("My Panel", "my_panel_prt", MyTab_prt);
+                MyPanel_prt = Setup_panel("My Panel", "my_panel_prt", MyTab_prt);
 
                 RibbonPanel ExportPanel_prt;
-                ExportPanel_prt = setup_panel("Export", "export_panel_prt", MyTab_prt);
+                ExportPanel_prt = Setup_panel("Export", "export_panel_prt", MyTab_prt);
 
                 RibbonPanel MyPanel_dwg;
-                MyPanel_dwg = setup_panel("My Panel", "my_panel_dwg", MyTab_dwg);
+                MyPanel_dwg = Setup_panel("My Panel", "my_panel_dwg", MyTab_dwg);
 
                 RibbonPanel MyPanel_asm;
-                MyPanel_asm = setup_panel("My Panel", "my_panel_asm", MyTab_asm);
+                MyPanel_asm = Setup_panel("My Panel", "my_panel_asm", MyTab_asm);
 
 
                 // Set up Buttons.
@@ -264,7 +264,7 @@ namespace My_CSharp_AddIn
             }
 
 
-            private RibbonTab setup_tab(string display_name, string internal_name, Ribbon inv_ribbon)
+            private RibbonTab Setup_tab(string display_name, string internal_name, Ribbon inv_ribbon)
             {
                 RibbonTab ribbon_tab = null;
                 try
@@ -285,7 +285,7 @@ namespace My_CSharp_AddIn
             }
 
 
-            private RibbonPanel setup_panel(string display_name, string internal_name, RibbonTab ribbon_tab)
+            private RibbonPanel Setup_panel(string display_name, string internal_name, RibbonTab ribbon_tab)
             {
                 RibbonPanel ribbon_panel = null;
                 try
@@ -306,7 +306,7 @@ namespace My_CSharp_AddIn
             }
 
 
-            private void m_uiEvents_OnResetRibbonInterface(NameValueMap Context)
+            private void UiEvents_OnResetRibbonInterface(NameValueMap Context)
             {
                 // The ribbon was reset, so add back the add-ins user-interface.
                 AddToUserInterface();
