@@ -104,8 +104,10 @@ namespace My_CSharp_AddIn
             public delegate ButtonDefinition CreateButton(string display_text, string internal_name, string icon_path);
             public ButtonDefinition button_template(string display_text, string internal_name, string icon_path)
             {
-                UI_Button MyButton = new UI_Button();
-                MyButton.bd = Utilities.CreateButtonDefinition(display_text, internal_name, "", icon_path);
+                UI_Button MyButton = new UI_Button
+                {
+                    bd = Utilities.CreateButtonDefinition(display_text, internal_name, "", icon_path)
+                };
                 return MyButton.bd;
             }
 

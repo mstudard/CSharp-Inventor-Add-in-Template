@@ -39,8 +39,10 @@ namespace My_CSharp_AddIn
             }
 
             string DXF_PATH;
-            FolderBrowserDialog fbd = new FolderBrowserDialog();
-            fbd.Description = "Select DXF Folder";
+            FolderBrowserDialog fbd = new FolderBrowserDialog
+            {
+                Description = "Select DXF Folder"
+            };
             if (fbd.ShowDialog() == DialogResult.OK)
             {
                 DXF_PATH = fbd.SelectedPath;
