@@ -14,8 +14,7 @@ namespace My_CSharp_AddIn
     {
         public static void RunAnExe()
         {
-            Process proc = new Process();
-            proc = Process.Start(@"C:\path_to\some_file.exe", "");
+            Process.Start(@"C:\path_to\some_file.exe", "");
         }
 
         public static void PopupMessage()

@@ -266,7 +266,6 @@ namespace My_CSharp_AddIn
 
             private RibbonTab setup_tab(string display_name, string internal_name, Ribbon inv_ribbon)
             {
-                RibbonTab setup_tabRet = default;
                 RibbonTab ribbon_tab = null;
                 try
                 {
@@ -281,14 +280,13 @@ namespace My_CSharp_AddIn
                     ribbon_tab = inv_ribbon.RibbonTabs.Add(display_name, internal_name, Globals.g_addInClientID);
                 }
 
-                setup_tabRet = ribbon_tab;
+                RibbonTab setup_tabRet = ribbon_tab;
                 return setup_tabRet;
             }
 
 
             private RibbonPanel setup_panel(string display_name, string internal_name, RibbonTab ribbon_tab)
             {
-                RibbonPanel setup_panelRet = default;
                 RibbonPanel ribbon_panel = null;
                 try
                 {
@@ -303,7 +301,7 @@ namespace My_CSharp_AddIn
                     ribbon_panel = ribbon_tab.RibbonPanels.Add(display_name, internal_name, Globals.g_addInClientID);
                 }
 
-                setup_panelRet = ribbon_panel;
+                RibbonPanel setup_panelRet = ribbon_panel;
                 return setup_panelRet;
             }
 
